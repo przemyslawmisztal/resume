@@ -1,0 +1,21 @@
+body {
+    font-family: Georgia, serif;
+    margin: 2em auto;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.email {
+    text-align: center;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 20px;
+    text-align: left;
+}
