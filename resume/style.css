@@ -29,9 +29,19 @@ h2 {
     margin-bottom: 10px;
     text-align: left;
 }
+table {
+    width: 100%; 
+    border-collapse: collapse;
+}
 td {
     vertical-align: top; 
     padding-top: 10px;
+}
+td.thirtypercent {
+    width: 30%;
+}
+td.seventypercent {
+    width: 70%;
 }
 td.jobposition, td.education {
     font-style: italic;
