@@ -25,7 +25,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
         defaultToOAuthAuthentication: false
         allowCrossTenantReplication: true
         minimumTlsVersion: 'TLS1_2'
-        allowBlobPublicAccess: false
+        allowBlobPublicAccess: true
         allowSharedKeyAccess: true
         networkAcls: {
             bypass: 'AzureServices'
@@ -48,28 +48,6 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
             keySource: 'Microsoft.Storage'
         }
         accessTier: 'Hot'
-    }
-}
-
-
-resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2023-01-01' = {
-    parent: storageAccount
-    name: 'default'
-    properties: {
-        cors: {
-            corsRules: []
-        }
-        deleteRetentionPolicy: {
-            enabled: false
-        }
-    }
-}
-
-resource staticWebsite 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-01-01' = {
-    parent: blobService
-    name: '$web'
-    properties: {
-        publicAccess: 'None'
     }
 }
 
