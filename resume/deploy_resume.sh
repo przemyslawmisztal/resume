@@ -76,3 +76,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 else
     echo "Deployment cancelled."
 fi
+
+# Deploy Front Door CDN for global distribution and custom domain
+echo "Deploying Front Door CDN..."
+az deployment group create \
+    --resource-group $RESOURCE_GROUP \
+    --template-file azure_automation/bicep_templates/frontDoor.bicep \
+    --parameters storageAccountName=$STORAGE_ACCOUNT_NAME
+check_result "Front Door deployment"
+
+echo "Front Door CDN deployment completed!"

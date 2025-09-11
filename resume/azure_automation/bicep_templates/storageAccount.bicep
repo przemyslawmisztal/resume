@@ -47,9 +47,11 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
             }
             keySource: 'Microsoft.Storage'
         }
-        accessTier: 'Hot'
+        accessTier: 'Cool'
     }
 }
 
 output storageAccountId string = storageAccount.id
 output storageAccountName string = storageAccount.name
+
+
