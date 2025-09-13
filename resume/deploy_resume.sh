@@ -63,12 +63,19 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
     # Upload website files
     echo "Uploading website files..."
-    az storage blob upload-batch \
-        --account-name $STORAGE_ACCOUNT_NAME \
-        --source "." \
-        --destination '$web' \
-        --pattern "*.html" \
-        --pattern "*.css"
+    
+    PATTERNS=("*.html" "*.css")
+    
+    for pattern in "${PATTERNS[@]}"; do
+        echo "Uploading $pattern files..."
+        az storage blob upload-batch \
+            --account-name $DEPLOYED_STORAGE_NAME \
+            --source "." \
+            --destination '$web' \
+            --pattern "$pattern" \
+            --overwrite 2>/dev/null || echo "No $pattern files found"
+    done
+    
     check_result "File upload"
     
     echo "Deployment completed successfully!"

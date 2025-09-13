@@ -40,14 +40,14 @@ resource frontDoorOrigin 'Microsoft.Cdn/profiles/originGroups/origins@2023-05-01
   name: '${storageAccountName}-origin'
   parent: frontDoorOriginGroup
   properties: {
-      hostName: '${storageAccountName}.z13.web.core.windows.net'
+      hostName: '${storageAccountName}.z13.web.${environment().suffixes.storage}'
       httpPort: 80
       httpsPort: 443
       priority: 1
       weight: 1000
       enabledState: 'Enabled'
       enforceCertificateNameCheck: true
-      originHostHeader: '${storageAccountName}.z13.web.core.windows.net'
+      originHostHeader: '${storageAccountName}.z13.web.${environment().suffixes.storage}'
   }
 }
 
