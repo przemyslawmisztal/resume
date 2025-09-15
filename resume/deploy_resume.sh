@@ -93,3 +93,22 @@ az deployment group create \
 check_result "Front Door deployment"
 
 echo "Front Door CDN deployment completed!"
+
+# Deploy Table API resources
+echo "Deploying Table API resources..."
+
+# Set Table API specific variables
+COSMOS_ACCOUNT_NAME="resume-cosmos-$(date +%s)"
+DATABASE_NAME="ResumeDatabase"
+
+az deployment group create \
+    --resource-group $RESOURCE_GROUP \
+    --template-file azure_automation/bicep_templates/tableapi.bicep \
+    --parameters cosmosDbAccountName=$COSMOS_ACCOUNT_NAME \
+                 databaseName=$DATABASE_NAME \
+                 location=$LOCATION
+check_result "Table API deployment"
+
+echo "Table API deployment completed!"
+echo "Cosmos DB Account: $COSMOS_ACCOUNT_NAME"
+echo "Database: $DATABASE_NAME"
