@@ -29,8 +29,10 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
       }
     ]
     consistencyPolicy: {
-      defaultConsistencyLevel: 'Session'
+      defaultConsistencyLevel: 'Eventual'
     }
+    enableMultipleWriteLocations: false
+    enableAutomaticFailover: false
   }
 }
 
@@ -46,5 +48,5 @@ resource database 'Microsoft.DocumentDB/databaseAccounts/tables@2023-04-15' = {
 
 output cosmosDbAccountName string = cosmosDbAccount.name
 output databaseName string = database.name
-output endpoint string = cosmosDbAccount.properties.documentEndpoint
-output tableEndpoint string = cosmosDbAccount.properties.tableEndpoint
+output documentEndpoint string = cosmosDbAccount.properties.documentEndpoint
+output tableEndpoint string = 'https://${cosmosDbAccountName}.table.${environment().suffixes.storage}'
